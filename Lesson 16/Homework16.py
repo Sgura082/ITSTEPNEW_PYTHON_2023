@@ -7,7 +7,7 @@ import re
 global TaskNames
 TaskNames = {"Task 1": {"Name": "Task 1: OOP- Banking operations",
                         "FunctionId": 0},
-             "Task 2": {"Name": "Task 2: x",
+             "Task 2": {"Name": "Task 2: OOP- Student data management",
                         "FunctionId": 1},
              "Task 3": {"Name": "Task 3: x",
                         "FunctionId": 2},
