@@ -1,4 +1,4 @@
-import os
+
 import random
 import re
 
@@ -32,8 +32,6 @@ Task_function_list = []
 # -----------CUSTOM CLASSES----------------
 
 # -----------CUSTOM FUNCTIONS----------------
-def clear_screen():
-    os.system("cls")
 
 
 def user_input_controlled_by_dict(dicta):
