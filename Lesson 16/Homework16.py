@@ -1,4 +1,4 @@
-import os
+
 import random
 import re
 
@@ -32,8 +32,6 @@ Task_function_list = []
 # -----------CUSTOM CLASSES----------------
 
 # -----------CUSTOM FUNCTIONS----------------
-def clear_screen():
-    os.system("cls")
 
 
 def user_input_controlled_by_dict(dicta):
@@ -63,7 +61,7 @@ def numInput_with_validation():
                 else:
                     break
             else:
-                print("ERROR Wrong input. Please enter only INT number.")
+                print("ERROR Wrong input. Please enter only number.")
         return userNum
 
 
@@ -115,7 +113,7 @@ def Task1():  # For task 1
         print("-------------\nCreating new Account:")
 
         user_name = input('Please enter your first name: ')
-        user_lastname = input('Please enter your first name: ')
+        user_lastname = input('Please enter your last name: ')
         user_id = input('Please enter your ID number: ')
         client_name = user_name + " " + user_lastname
         client_new_account_number = "GE" + str(random.randint(100000000000000, 999999999999999))
@@ -266,8 +264,8 @@ def Task2():  # For task 2
                                     break
                             else:
                                 print("No such number found!! Choose only from the list")
-                exit = input("\nEXIT? YES (y) / NO (Any other key)")
-                if exit == "y":
+                exit = input("\nCONTINUE? YES (y) / NO (Any other key)")
+                if exit != "y":
                     break
             else:
                 print("No student was found with such ID. Try again")
