@@ -160,7 +160,8 @@ def task1_body():
                 # has 'next' filled and its index is below the index of a Node that comes before the insertion
                 # index is incremented and next nodes are set as current ones
                 current_node = current_node.next
-                print(current_node)
+                current_index += 1
+
             current_node.next = current_node.next.next
             pass
         def remove(self, data):
