@@ -26,7 +26,7 @@ class Task():
     def write_function(self, object101):
         self.Function = object101
 
-    def RunMainCode(self):
+    def __call__(self):
         Looper = "y"
         while Looper == "y":
             self.Function()
@@ -64,7 +64,7 @@ Task03.write_function(task3_body)
 for task in Task_list:
     Task_status = input(f"\nDo you want to do - {task}? \n(Enter 'y' for YES or any key for NO) ")
     if Task_status == "y":
-        task.RunMainCode()
+        task()
     else:
         print(f" \n{task} - Skipped")
 print("\n ---THE END---")
