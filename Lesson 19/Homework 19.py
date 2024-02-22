@@ -59,6 +59,8 @@ def task1_body():
             """
             self.data = data
             self.next = None
+        def __str__(self):
+            return str(self.data)
 
     class LinkedList:
         """
@@ -137,9 +139,33 @@ def task1_body():
             current_node.next = new_node #Sets new_node as the next for the current_node since now it comes after
             # it in the order.
 
+        def remove_by_index(self, index):
+            """
+            Removes the element from the LinkedList with specific index
+            :param index: index of a node that needs to be removed
+            :return:
+            """
+            if index == 0:
+                #If the desired index is 0 then the second node is set as the head of LinkedList thus erasing the
+                # desired node
+                self.head = self.head.next
+                return
+
+            current_index = 0
+            current_node = self.head
+
+            while current_node.next and current_index < index - 1:
+                # In order to find the Node in list that comes
+                # before the desired index system checks every Node from the very start. While the checked(current) Node
+                # has 'next' filled and its index is below the index of a Node that comes before the insertion
+                # index is incremented and next nodes are set as current ones
+                current_node = current_node.next
+                print(current_node)
+            current_node.next = current_node.next.next
+            pass
         def remove(self, data):
             """
-            Removes the data from the LinkedList
+            Removes the node from the LinkedList that contains 'data'
             :param data: data to be removed from the LinkedList
             :return:
             """
@@ -187,8 +213,8 @@ def task1_body():
     linked_list.remove("Irakli")
     linked_list.remove(4)
     linked_list.display_info()
-
-
+    linked_list.remove_by_index(3)
+    linked_list.display_info()
 Task01.write_function(task1_body)
 
 
