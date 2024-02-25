@@ -53,6 +53,7 @@ def task1_body():
     class BinaryTree:
         def __init__(self):
             self.root = None
+            self.edge_count = 0
         def insert(self,key):
             self.root = self._insert(self.root, key)
         def _insert(self, node, key):
@@ -73,13 +74,22 @@ def task1_body():
                     self.print_Leafs(node.right)
             else:
                 return
+        def count_Edges(self,node):
+            if node:
+                if node.left:
+                    self.edge_count += 1
+                    self.count_Edges(node.left)
+                if node.right:
+                    self.edge_count += 1
+                    self.count_Edges(node.right)
 
+            return self.edge_count
 
     # ----------------Task Functions----------------------------------
     # ----------------Task BODY---------------------------------------
     binTree = BinaryTree()
-    binTree.insert(10)
-    binTree.insert(7)
+    binTree.insert(11)
+    binTree.insert(6)
     binTree.insert(8)
     binTree.insert(12)
     binTree.insert(9)
@@ -87,8 +97,9 @@ def task1_body():
     binTree.insert(35)
     binTree.insert(3)
     binTree.insert(13)
+    print("Leaf node keys: ", end ="")
     binTree.print_Leafs(binTree.root)
-    print(f"\n{binTree.count_Edges(binTree.root)}")
+    print(f"\nCount of edges is: {binTree.count_Edges(binTree.root)}")
 Task01.write_function(task1_body)
 
 
