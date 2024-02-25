@@ -40,9 +40,9 @@ class Task():
 # -----------CUSTOM FUNCTIONS----------------
 
 # -----------TASK OBJECTS----------------
-Task01 = Task("x")
-Task02 = Task("x")
-Task03 = Task("x")
+Task01 = Task("Using DECORATORS")
+Task02 = Task("Using DECORATORS with functors")
+Task03 = Task("Financial Transactions with commissions")
 
 
 def task1_body():
