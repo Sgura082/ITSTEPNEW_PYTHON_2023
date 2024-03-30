@@ -1,6 +1,8 @@
 import threading
 import time
 import queue
+import random
+import logging
 
 # --------------------TASK DESCRIPTIONS-------------------------------
 # ------Task1: JSON file parsing using threading
@@ -46,6 +48,8 @@ Task01 = Task("JSON file parsing using threading")
 def task1_body():
     pass
     # ----------------Task Variables----------------------------------
+
+
     # ----------------Task Classes------------------------------------
     # ----------------Task Functions----------------------------------
     # ----------------Task BODY---------------------------------------
@@ -56,9 +60,35 @@ Task02 = Task("Checking if numbers are even Using Queue")
 def task2_body():
     pass
     # ----------------Task Variables----------------------------------
+    number_Queue = queue.Queue()
+    num_workers = 3
+    mthreads =[]
+
     # ----------------Task Classes------------------------------------
     # ----------------Task Functions----------------------------------
+    def worker(queue1):
+        worker.threadname =""
+        assert isinstance(queue1, queue.Queue)
+        while True:
+            number =queue1.get()
+            if number == None:
+                break
+            if number % 2 == 0:
+                print(f"{threading.current_thread().name}: Number {number} is EVEN!!")
+            else:
+                print(f"{threading.current_thread().name}: Number {number} is ODD!!")
     # ----------------Task BODY---------------------------------------
+    for _ in range(num_workers):
+        thread = threading.Thread(target = worker, args=(number_Queue,))
+        thread.start()
+        mthreads.append(thread)
+    for i in range(100):
+        number_Queue.put(random.randint(1,1000))
+    for _ in range(num_workers):
+        number_Queue.put(None)
+    for i in mthreads:
+        i.join()
+    print("----------------------ALL Tasks finished--------------------")
 Task02.write_function(task2_body)
 
 
