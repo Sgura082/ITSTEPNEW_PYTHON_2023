@@ -1,7 +1,7 @@
 import re
 
 # --------------------TASK DESCRIPTIONS-------------------------------
-# ------Task1: Using DECORATORS
+# ------Task1:
 # ------Task2:
 # ------Task3:
 # ------Task4:
@@ -41,10 +41,6 @@ class Task():
 
 # -----------TASK OBJECTS----------------
 Task01 = Task("x")
-Task02 = Task("x")
-Task03 = Task("x")
-
-
 def task1_body():
     pass
     # ----------------Task Variables----------------------------------
@@ -53,7 +49,7 @@ def task1_body():
     # ----------------Task BODY---------------------------------------
 Task01.write_function(task1_body)
 
-
+Task02 = Task("x")
 def task2_body():
     pass
     # ----------------Task Variables----------------------------------
@@ -62,7 +58,7 @@ def task2_body():
     # ----------------Task BODY---------------------------------------
 Task02.write_function(task2_body)
 
-
+Task03 = Task("x")
 def task3_body():
     pass
     # ----------------Task Variables----------------------------------
