@@ -2,7 +2,7 @@ import threading
 import time
 import queue
 import random
-import logging
+import json
 
 # --------------------TASK DESCRIPTIONS-------------------------------
 # ------Task1: JSON file parsing using threading
@@ -48,11 +48,39 @@ Task01 = Task("JSON file parsing using threading")
 def task1_body():
     pass
     # ----------------Task Variables----------------------------------
-
-
+    data = [{"Book name": "Red riding rooster", "Publishing date": 1954, "Rating": 4},
+            {"Book name": "BLUE horizon", "Publishing date": 2054, "Rating": 1},
+            {"Book name": "C# and python story of love", "Publishing date": 2024, "Rating": 3},
+            {"Book name": "2001 Futute UTOPIA", "Publishing date": 1854, "Rating": 2}]
+    file_list =["file1.json","file2.json","file3.json"]
+    num_threads = 3
+    threads =[]
     # ----------------Task Classes------------------------------------
     # ----------------Task Functions----------------------------------
+    def reader(json_file):
+        with open(json_file, "r") as jfile:
+            rdata = json.load(jfile)
+            print(f"{threading.current_thread().name} // File name:{json_file}")
+            for i in rdata:
+                print(f"Data: {i}")
+            print("")
+
     # ----------------Task BODY---------------------------------------
+    with open("file1.json", "w") as jfile:
+        json.dump(data, jfile)
+    with open("file2.json", "w") as jfile:
+        json.dump(data, jfile)
+    with open("file3.json", "w") as jfile:
+        json.dump(data, jfile)
+
+    for file in file_list:
+        thread = threading.Thread(target=reader, args = (file,))
+        thread.start()
+        threads.append(thread)
+    for thread in threads:
+        thread.join()
+
+    print("----------------------ALL Tasks finished--------------------")
 Task01.write_function(task1_body)
 
 Task02 = Task("Checking if numbers are even Using Queue")
