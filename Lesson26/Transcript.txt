@@ -1,0 +1,2 @@
+b'saf joined the chatbox'
+b'saf -> dawq'
