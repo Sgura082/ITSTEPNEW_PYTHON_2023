@@ -5,7 +5,7 @@ import random
 # --------------------TASK DESCRIPTIONS-------------------------------
 # ------Task1: Launching two Async functions
 # ------Task2: Async function, number printer
-# ------Task3:
+# ------Task3: Async function: math operations
 # ------Task4:
 
 
@@ -94,15 +94,33 @@ def task2_body():
 Task02.write_function(task2_body)
 # -----------------------------------------------------------------------------------------------------END TASK 2--------
 # ---------------------------------------------------------------------------------------------------START TASK 3--------
-Task03 = Task("x")
+Task03 = Task("Async function: math operations")
 
 
 def task3_body():
     pass
     # ----------------Task Variables----------------------------------
+    User_input = input("Enter any number: ")
     # ----------------Task Classes------------------------------------
     # ----------------Task Functions----------------------------------
+    async def math_power(x):
+        if await even_checker(x):
+            print(x**2)
+    async def even_checker(x):
+        if x % 2 == 0.0:
+            return x
+        else:
+            print("Number isn't EVEN")
+            return
+
     # ----------------Task BODY---------------------------------------
+    async def main():
+        task1 = asyncio.gather(math_power(float(User_input)))
+        task2 = asyncio.gather(even_checker(float(User_input)))
+        await task1
+        await task2
+    if __name__ == '__main__':
+        asyncio.run(main())
 
 
 Task03.write_function(task3_body)
