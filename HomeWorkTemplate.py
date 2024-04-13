@@ -1,5 +1,4 @@
-a = None
-b = None
+a = [1,2,3,4]
 
-while a or b:
-    print(1)
+a[a.index(3)] = 6
+print (a)

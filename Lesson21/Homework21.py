@@ -84,9 +84,9 @@ def task1_body():
 
     with open("Json_data.json", "r") as json_fileR:
         data = json.load(json_fileR, object_hook=cus_decoder)
-
+    print(data)
     for i in data:
-        print(f"-----------------------------------------------\n{i}")
+        print(f"-----------------------------------------------\n   {i}")
 
 
 Task01.write_function(task1_body)
