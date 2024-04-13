@@ -1,7 +1,6 @@
-from abc import ABC, abstractmethod
 
 # ------------------------------------------------------------------------------TASK DESCRIPTIONS-----------------------
-# ------Task1: Creating Media Player using SOLID principles
+# ------Task1:
 # ------Task2:
 # ------Task3:
 # ------Task4:
@@ -40,64 +39,13 @@ class Task():
 
 # ------------------------------------------------------------------------------TASK OBJECTS----------------------------
 # --------------------------------------------------------------------------------------------------START TASK 1--------
-Task01 = Task("Creating Media Player using SOLID principles")
+Task01 = Task("x")
 def task1_body():
     pass
     # ----------------Task Variables----------------------------------
     # ----------------Task Classes------------------------------------
-    class Iplayer(ABC):
-        def play(self,file):
-            print(f"playing - {file}")
-    class Ipauser(ABC):
-        def pause(self,file):
-            print(f"paused - {file}")
-    class Istopper(ABC):
-        def stop(self,file):
-            print(f"Stopped - {file}")
-    class Irewinder(ABC):
-        def rewind(self,file):
-            print(f"rewinding - {file}")
-    class Iforwarder(ABC):
-        def forward(self,file):
-            print(f"forwarding - {file}")
-    class Ifast_forwarder(ABC):
-        def fast_forward(self,file):
-            print(f"fast forwarding - {file}")
-    class Video_player(Iplayer,Ipauser,Istopper,Irewinder,Iforwarder,Ifast_forwarder):
-        def __init__(self):
-            print("Movie Player open\n------------------------")
-    class Audio_player(Iplayer,Ipauser,Istopper,Irewinder,Iforwarder,Ifast_forwarder):
-        def __init__(self):
-            print("Audio Player open\n------------------------")
-    class Stream_player(Iplayer,Ipauser,Istopper):
-        def __init__(self):
-            print("Stream Player open\n------------------------")
-
     # ----------------Task Functions----------------------------------
     # ----------------Task BODY---------------------------------------
-    VP = Video_player()
-    VP.play("movie.avi")
-    VP.pause("movie.avi")
-    VP.stop("movie.avi")
-    VP.play("movie.avi")
-    VP.rewind("movie.avi")
-    VP.fast_forward("movie.avi")
-    print("------------------------------------\n")
-    AP = Audio_player()
-    AP.play("music.flac")
-    AP.pause("music.flac")
-    AP.stop("music.flac")
-    AP.play("music.flac")
-    AP.rewind("music.flac")
-    AP.fast_forward("music.flac")
-    print("------------------------------------\n")
-    SP = Stream_player()
-    SP.play("youtube stream")
-    SP.pause("youtube stream")
-    SP.stop("youtube stream")
-
-
-
 Task01.write_function(task1_body)
 # ----------------------------------------------------------------------------------------------------END TASK 1--------
 # --------------------------------------------------------------------------------------------------START TASK 2--------
