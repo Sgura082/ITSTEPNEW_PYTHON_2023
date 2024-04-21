@@ -23,10 +23,13 @@ class ContactManager:
             return f"Contact '{name}' not found."
 
     def display_contacts(self):
+
+        #----CODE OF METHOD IS FAULTY!!!! it will always print only first contact and stop!!
         if self.contacts:
             print("Contacts:")
             for name, phone_number in self.contacts.items():
                 return f"Name: {name}, Phone Number: {phone_number}"
         else:
             return "No contacts found."
+
 
