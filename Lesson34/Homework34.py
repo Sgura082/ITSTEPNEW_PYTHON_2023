@@ -52,17 +52,13 @@ def task1_body():
     # ----------------Task Variables----------------------------------
     HOST = 'localhost'
     PORT = 5432
-    DATABASE = 'Lesson33'
+    DATABASE = 'Lesson34'
     USER = 'postgres'
     PASSWORD = 'XX132Files'
 
     database_string = f'postgresql+psycopg2://{USER}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}'
     engine = create_engine(database_string)
     Base = declarative_base()
-
-    product_list = []
-    category_list = []
-    order_list = []
 
     # ----------------Task Classes------------------------------------
     class Products(Base):
@@ -87,7 +83,7 @@ def task1_body():
         def __init__(self, category_name):
             self.category_name = category_name
 
-    class orders(Base):
+    class Orders(Base):
         __tablename__ = 'orders'
         order_id = Column('category_id', Integer, primary_key=True, autoincrement=True, unique=True)
         product_id = Column('product_id', Integer, ForeignKey('products.product_id'))
@@ -101,25 +97,68 @@ def task1_body():
             self.order_date = order_date
             self.status = status
 
-    # ----------------Task Functions----------------------------------
-    # ----------------Task BODY---------------------------------------
+    # ----------------Task Functions------------------------------------------------------------------------------------
+    # 1) For inserting in product table:
+    def add_product(product_name, price, stock_quantity, category_id):
+        product = Products(product_name, price, stock_quantity, category_id)
+        session.add(product)
+        session.commit()
+
+    # 2) For inserting in categories table:
+    def add_category(category_name):
+        category = Categories(category_name)
+        session.add(category)
+        session.commit()
+
+    # 3) For Deleting elements from product table
+    def delete_product(product_name):
+        product_data = session.query(Products).all()
+        for product in product_data:
+            if product.product_name == product_name:
+                session.delete(product)
+                session.commit()
+
+    # 4) For Updating elements from product table
+    def update_product(product_name):
+        pass
+
+    # For cleaning all tables
+    def clear_all_tables():
+        data = session.query(Products).all()
+        for i in data:
+            session.delete(i)
+            session.commit()
+        data = session.query(Categories).all()
+        for i in data:
+            session.delete(i)
+            session.commit()
+        data = session.query(Orders).all()
+        for i in data:
+            session.delete(i)
+            session.commit()
+
+    # ----------------Task BODY-----------------------------------------------------------------------------------------
     Base.metadata.create_all(engine)
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    # 1) inserting in product table:
-    product1 = Products("LG 2000: vacuum TV", 4999.90, 2, 4)
-    product_list.append(product1)
-    product2 = Products("ASSus Nutbook 1.2", 456.56, 200, 4)
-    product_list.append(product2)
-    product3 = Products("Onion Ragu", 1.99, 1, 1)
-    product_list.append(product3)
-    product4 = Products("Grandma Socks", 3.50, 50, 2)
-    product_list.append(product4)
-    product5 = Products("Key to WC", 99999.99, 1, 3)
-    product_list.append(product5)
+    # adding new elements into categories table:
+    add_category("Food")
+    add_category("Clothes")
+    add_category("Essentials")
+    add_category("Electronics")
 
-    # 2) inserting into categories table:
+    # adding new elements into product table:
+    add_product("LG 2000: vacuum TV", 4999.90, 2, 4)
+    add_product("ASSus Nutbook 1.2", 456.56, 200, 4)
+    add_product("Onion Ragu", 1.99, 1, 1)
+    add_product("Grandma Socks", 3.50, 50, 2)
+    add_product("Key to WC", 99999.99, 1, 3)
+
+    delete_product('ASSus Nutbook 1.2')
+
+    clear_all_tables()
+
 
 Task01.write_function(task1_body)
 # ----------------------------------------------------------------------------------------------------END TASK 1--------
