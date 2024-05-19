@@ -2,6 +2,7 @@ import psycopg2
 from sqlalchemy import create_engine, Column, Integer, String, Date, ForeignKey, Double
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+import datetime
 
 # ------------------------------------------------------------------------------TASK DESCRIPTIONS-----------------------
 # ------Task1: Working with SQl: Creating Tables and etc - ORM
@@ -75,6 +76,9 @@ def task1_body():
             self.stock_quantity = stock_quantity
             self.category_id = category_id
 
+        def __str__(self):
+            return f"Product: {self.product_name} ; Price: {self.product_price}; Stock: {self.stock_quantity}"
+
     class Categories(Base):
         __tablename__ = 'categories'
         category_id = Column('category_id', Integer, primary_key=True, autoincrement=True, unique=True)
@@ -82,6 +86,9 @@ def task1_body():
 
         def __init__(self, category_name):
             self.category_name = category_name
+
+        def __str__(self):
+            return f"category_id: {self.category_id} ; category_name: {self.category_name}"
 
     class Orders(Base):
         __tablename__ = 'orders'
@@ -96,6 +103,9 @@ def task1_body():
             self.quantity = quantity
             self.order_date = order_date
             self.status = status
+
+        def __str__(self):
+            return f"Order Quantity: {self.quantity} ; Order Date: {self.order_date} ; Order Status: {self.status}"
 
     # ----------------Task Functions------------------------------------------------------------------------------------
     # 1) For inserting in product table:
@@ -119,8 +129,24 @@ def task1_body():
                 session.commit()
 
     # 4) For Updating elements from product table
-    def update_product(product_name):
-        pass
+    def update_product(product_name, order_quantity):
+        product_data = session.query(Products).all()
+        for product in product_data:
+            if product.product_name == product_name:
+                if product.stock_quantity >= order_quantity:
+                    product.stock_quantity -= order_quantity
+                    session.commit()
+
+
+    # 5) For order creation and stock control
+    def add_order(product_id, quantity, order_date, status):
+        order = Orders(product_id, quantity, order_date, status)
+        product_data = session.query(Products).all()
+        for product in product_data:
+            if product.product_id == product_id:
+                update_product(product.product_name, quantity)
+            session.add(order)
+            session.commit()
 
     # For cleaning all tables
     def clear_all_tables():
@@ -155,9 +181,29 @@ def task1_body():
     add_product("Grandma Socks", 3.50, 50, 2)
     add_product("Key to WC", 99999.99, 1, 3)
 
-    delete_product('ASSus Nutbook 1.2')
+    # making orders (adding elements to orders table and updating product elements in product table:
+    add_order(1, 1, datetime.date.today(), "Pending")
+    add_order(4, 20, datetime.date.today(), "Delivered")
+    add_order(2, 1, datetime.date.today(), "Pending")
+    add_order(3, 1, datetime.date.today(), "Pending")
+    add_order(4, 1, datetime.date.today(), "Delivered")
 
-    clear_all_tables()
+    joinedQ = session.query(
+        Orders.order_id,
+        Orders.product_id,
+        Products.product_name,
+        Categories.category_name,
+        Products.product_price,
+        Orders.quantity,
+        Orders.order_date,
+        Products.stock_quantity,
+        Orders.status
+    ).filter_by(status = "Pending").join(Products, Products.product_id == Orders.product_id).\
+        join(Categories, Categories.category_id == Products.product_id).all()
+    for i in joinedQ:
+        print(f"OrderID: {i[0]} / Order Status: {i[8]} / ProductID: {i[1]} / Product: {i[2]} / Category: {i[3]} \n"
+              f"Product Price: {i[4]} / Order_Quantity: {i[5]} / Order Date: {i[6]} / Remaining stock for product: {i[7]}"
+              f"\n---------------------------------------------------------------------------------------------------")
 
 
 Task01.write_function(task1_body)
